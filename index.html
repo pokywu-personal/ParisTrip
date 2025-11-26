@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3B82F6">
+    <meta name="description" content="Paris Family Trip Planner - March 29 - April 4, 2026">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Paris Trip">
+    <title>Paris Family Trip 2026</title>
+    <link rel="manifest" href="#" id="manifest-placeholder">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #EFF6FF 0%, #FCE7F3 50%, #F3E8FF 100%);
+            min-height: 100vh;
+            padding: 24px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .header h1 {
+            font-size: 2.25rem;
+            font-weight: bold;
+            color: #1F2937;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            color: #6B7280;
+            margin-bottom: 8px;
+        }
+        
+        .header-location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: #9CA3AF;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+        
+        .tab-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .tab-button.active {
+            background: #3B82F6;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .tab-button.inactive {
+            background: white;
+            color: #374151;
+        }
+        
+        .day-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        
+        .day-button {
+            padding: 8px 16px;
+            border-radius: 8px;
+            white-space: nowrap;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .day-button.active {
+            background: #3B82F6;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .day-button.inactive {
+            background: white;
+            color: #374151;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1F2937;
+            margin-bottom: 16px;
+        }
+        
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #1F2937;
+            margin-bottom: 16px;
+        }
+        
+        .hero-banner {
+            height: 256px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 24px;
+        }
+        
+        .hero-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-emoji {
+            font-size: 6rem;
+            opacity: 0.3;
+        }
+        
+        .hero-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 24px;
+        }
+        
+        .hero-text h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin: 0;
+        }
+        
+        .hero-text p {
+            color: rgba(255,255,255,0.9);
+            margin: 0;
+        }
+        
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        
+        .activity-item:hover {
+            background: #F9FAFB;
+        }
+        
+        .activity-icon {
+            font-size: 2rem;
+        }
+        
+        .activity-time {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #6B7280;
+        }
+        
+        .activity-name {
+            color: #1F2937;
+            font-weight: 500;
+        }
+        
+        .location-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .location-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #F9FAFB;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+        
+        .location-item:hover {
+            background: #F3F4F6;
+            transform: translateX(4px);
+        }
+        
+        .location-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .location-name {
+            font-weight: 500;
+            color: #1F2937;
+            transition: color 0.2s;
+        }
+        
+        .location-item:hover .location-name {
+            color: #3B82F6;
+        }
+        
+        .location-address {
+            font-size: 0.75rem;
+            color: #6B7280;
+            margin-top: 4px;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+        
+        .food-card {
+            padding: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .food-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .food-emoji {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .food-name {
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+        }
+        
+        .food-card:hover .food-name {
+            color: #3B82F6;
+        }
+        
+        .food-desc {
+            font-size: 0.875rem;
+            color: #6B7280;
+            margin-bottom: 8px;
+        }
+        
+        .food-location {
+            font-size: 0.75rem;
+            color: #9CA3AF;
+        }
+        
+        .checklist-section {
+            border: 2px solid;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .checklist-section.high {
+            border-color: #FCA5A5;
+            background: #FEF2F2;
+        }
+        
+        .checklist-section.medium {
+            border-color: #FCD34D;
+            background: #FEFCE8;
+        }
+        
+        .checklist-section.low {
+            border-color: #86EFAC;
+            background: #F0FDF4;
+        }
+        
+        .checklist-title {
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .checklist-title.high { color: #991B1B; }
+        .checklist-title.medium { color: #92400E; }
+        .checklist-title.low { color: #14532D; }
+        
+        .checklist-items {
+            list-style: none;
+        }
+        
+        .checklist-items li {
+            padding: 8px 0;
+            font-size: 0.875rem;
+            color: #374151;
+        }
+        
+        .recommendation-card {
+            padding: 16px;
+            border-radius: 8px;
+            border: 2px solid #F3F4F6;
+            transition: all 0.2s;
+        }
+        
+        .recommendation-card:hover {
+            border-color: #FED7AA;
+        }
+        
+        .rec-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .rec-icon {
+            font-size: 2rem;
+        }
+        
+        .rec-badge {
+            font-size: 0.75rem;
+            background: #FED7AA;
+            color: #92400E;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .rec-name {
+            font-weight: bold;
+            color: #1F2937;
+            font-size: 0.875rem;
+            margin-bottom: 4px;
+        }
+        
+        .rec-desc {
+            font-size: 0.75rem;
+            color: #6B7280;
+        }
+        
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            max-width: 90%;
+        }
+        
+        .install-prompt button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .install-prompt button:hover {
+            background: #f0f0f0;
+        }
+        
+        .install-prompt .dismiss {
+            background: transparent;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+            
+            .header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .tabs {
+                gap: 8px;
+            }
+            
+            .tab-button {
+                padding: 10px 16px;
+                font-size: 0.875rem;
+            }
+            
+            .grid-4 {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <div id="install-prompt" class="install-prompt">
+        <span>📱 Install this app for easy offline access!</span>
+        <button id="install-button">Install</button>
+        <button id="dismiss-button" class="dismiss">✕</button>
+    </div>
+
+    <script>
+        const itineraryData = [
+            {
+                day: "Day 1 - March 29",
+                title: "Arrival Evening",
+                activities: [
+                    { time: "5:30 PM", activity: "Arrive Paris", icon: "✈️" },
+                    { time: "Evening", activity: "Saint-Germain-des-Prés stroll", icon: "🚶" },
+                    { time: "Dinner", activity: "Local bistro + Pierre Hermé macarons", icon: "🍰" }
+                ],
+                locations: [
+                    { name: "Hotel (Saint-Germain)", lat: 48.8503, lng: 2.3292, address: "117 Rue de Rennes, 75006 Paris" },
+                    { name: "Pierre Hermé", lat: 48.8522, lng: 2.3301, address: "72 Rue Bonaparte, 75006 Paris" }
+                ],
+                recommendations: [
+                    { type: "Restaurant", name: "Les Deux Magots", description: "Historic café where Hemingway & Picasso hung out", icon: "☕" },
+                    { type: "Pastry", name: "Pierre Hermé", description: "Best macarons in Paris - try Ispahan", icon: "🍰" },
+                    { type: "Restaurant", name: "L'Avant Comptoir", description: "Casual tapas spot, no reservations needed", icon: "🍷" },
+                    { type: "Souvenir", name: "Diptyque Boutique", description: "Luxury Parisian candles", icon: "🕯️" }
+                ],
+                imageBg: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                imageEmoji: "🌃",
+                color: "#E8B4B8"
+            },
+            {
+                day: "Day 2 - March 30",
+                title: "Museums & Île de la Cité",
+                activities: [
+                    { time: "Morning", activity: "Musée d'Orsay", icon: "🎨" },
+                    { time: "Afternoon", activity: "Notre-Dame & Sainte-Chapelle", icon: "⛪" },
+                    { time: "Evening", activity: "Latin Quarter exploration", icon: "🌆" }
+                ],
+                locations: [
+                    { name: "Musée d'Orsay", lat: 48.8600, lng: 2.3266, address: "1 Rue de la Légion d'Honneur, 75007 Paris" },
+                    { name: "Notre-Dame", lat: 48.8530, lng: 2.3499, address: "6 Parvis Notre-Dame, 75004 Paris" },
+                    { name: "Sainte-Chapelle", lat: 48.8554, lng: 2.3450, address: "8 Boulevard du Palais, 75001 Paris" }
+                ],
+                recommendations: [
+                    { type: "Café", name: "Café de Flore", description: "Legendary literary café", icon: "☕" },
+                    { type: "Restaurant", name: "L'As du Fallafel", description: "Best falafel in Paris", icon: "🥙" },
+                    { type: "Ice Cream", name: "Berthillon", description: "Legendary ice cream", icon: "🍦" },
+                    { type: "Pastry", name: "Stohrer", description: "Paris's oldest pâtisserie (1730)", icon: "🥐" }
+                ],
+                imageBg: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+                imageEmoji: "🎨",
+                color: "#A8D5BA"
+            }
+        ];
+
+        let currentDay = 0;
+        let currentTab = 'itinerary';
+
+        function createLocationUrl(lat, lng) {
+            return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        }
+
+        function renderApp() {
+            const day = itineraryData[currentDay];
+            const root = document.getElementById('root');
+            
+            root.innerHTML = `
+                <div class="container">
+                    <div class="header">
+                        <h1>Paris Family Adventure</h1>
+                        <p>March 29 - April 4, 2026 • 3 Travelers</p>
+                        <div class="header-location">
+                            <span>📍</span>
+                            <span>Staying at 117 Rue de Rennes, Saint-Germain-des-Prés</span>
+                        </div>
+                    </div>
+
+                    <div class="tabs">
+                        <button class="tab-button ${currentTab === 'itinerary' ? 'active' : 'inactive'}" onclick="switchTab('itinerary')">
+                            📅 Itinerary
+                        </button>
+                        <button class="tab-button ${currentTab === 'local' ? 'active' : 'inactive'}" onclick="switchTab('local')">
+                            🥐 Local Goods
+                        </button>
+                        <button class="tab-button ${currentTab === 'preparation' ? 'active' : 'inactive'}" onclick="switchTab('preparation')">
+                            ✓ Preparation
+                        </button>
+                    </div>
+
+                    <div id="tab-content"></div>
+                </div>
+            `;
+
+            const tabContent = document.getElementById('tab-content');
+
+            if (currentTab === 'itinerary') {
+                tabContent.innerHTML = `
+                    <div class="day-selector">
+                        ${itineraryData.map((d, idx) => `
+                            <button class="day-button ${currentDay === idx ? 'active' : 'inactive'}" 
+                                    onclick="selectDay(${idx})">
+                                ${d.day.split(' - ')[0]}
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div class="card">
+                        <div class="hero-banner" style="background: ${day.imageBg}">
+                            <div class="hero-content">
+                                <div class="hero-emoji">${day.imageEmoji}</div>
+                            </div>
+                            <div class="hero-text">
+                                <h2>${day.title}</h2>
+                                <p>${day.day}</p>
+                            </div>
+                        </div>
+
+                        <h3>Daily Activities</h3>
+                        <div class="activity-list">
+                            ${day.activities.map(activity => `
+                                <div class="activity-item" style="border-left: 4px solid ${day.color}">
+                                    <span class="activity-icon">${activity.icon}</span>
+                                    <div>
+                                        <div class="activity-time">${activity.time}</div>
+                                        <div class="activity-name">${activity.activity}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <h3 style="margin-top: 24px;">Key Stops</h3>
+                        <div class="location-list">
+                            ${day.locations.map((loc, idx) => `
+                                <a href="${createLocationUrl(loc.lat, loc.lng)}" 
+                                   target="_blank" 
+                                   class="location-item">
+                                    <div class="location-number" style="background: ${day.color}">
+                                        ${idx + 1}
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <div class="location-name">${loc.name} 📍</div>
+                                        <div class="location-address">${loc.address}</div>
+                                    </div>
+                                </a>
+                            `).join('')}
+                        </div>
+
+                        <h3 style="margin-top: 24px;">Local Recommendations</h3>
+                        <div class="grid grid-2">
+                            ${day.recommendations.map(rec => `
+                                <div class="recommendation-card">
+                                    <div class="rec-header">
+                                        <span class="rec-icon">${rec.icon}</span>
+                                        <div style="flex: 1;">
+                                            <div class="rec-badge">${rec.type}</div>
+                                            <div class="rec-name">${rec.name}</div>
+                                            <div class="rec-desc">${rec.description}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (currentTab === 'local') {
+                tabContent.innerHTML = `
+                    <div class="card">
+                        <h2>🥐 Must-Try Near Your Hotel</h2>
+                        <p style="color: #6B7280; margin-bottom: 24px;">Your hotel in Saint-Germain-des-Prés is perfectly located near some of Paris's best food spots!</p>
+                        
+                        <div class="grid grid-4">
+                            ${[
+                                { name: "Pierre Hermé", emoji: "🥐", desc: "World-famous macarons", location: "5 min walk", lat: 48.8522, lng: 2.3301, bg: "#FED7AA" },
+                                { name: "Poilâne", emoji: "🍞", desc: "Legendary sourdough", location: "3 min walk", lat: 48.8511, lng: 2.3274, bg: "#FBCFE8" },
+                                { name: "L'Éclair de Génie", emoji: "⚡", desc: "Creative éclairs", location: "Multiple locations", lat: 48.8556, lng: 2.3617, bg: "#FEF08A" },
+                                { name: "Angelina", emoji: "☕", desc: "Hot chocolate heaven", location: "Near Louvre", lat: 48.8652, lng: 2.3289, bg: "#DDD6FE" },
+                                { name: "Gérard Mulot", emoji: "🍰", desc: "Everything is amazing", location: "7 min walk", lat: 48.8540, lng: 2.3349, bg: "#FECACA" },
+                                { name: "Du Pain et des Idées", emoji: "🧈", desc: "Incredible pastries", location: "Worth the trip", lat: 48.8714, lng: 2.3633, bg: "#BFDBFE" },
+                                { name: "Berthillon", emoji: "🍦", desc: "Legendary ice cream", location: "Île Saint-Louis", lat: 48.8527, lng: 2.3560, bg: "#C7D2FE" },
+                                { name: "Any Boulangerie", emoji: "🥖", desc: "Fresh baguette daily", location: "Ask for 'tradition'", lat: 48.8503, lng: 2.3292, bg: "#BBF7D0" }
+                            ].map(food => `
+                                <a href="${createLocationUrl(food.lat, food.lng)}" 
+                                   target="_blank"
+                                   class="food-card"
+                                   style="background: ${food.bg}">
+                                    <div class="food-emoji">${food.emoji}</div>
+                                    <div class="food-name">${food.name} 📍</div>
+                                    <div class="food-desc">${food.desc}</div>
+                                    <div class="food-location">${food.location}</div>
+                                </a>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (currentTab === 'preparation') {
+                tabContent.innerHTML = `
+                    <div class="card">
+                        <h2>✓ Preparation Checklist</h2>
+                        <p style="color: #6B7280; margin-bottom: 24px;">Complete these tasks before your departure on March 29, 2026</p>
+                        
+                        <div class="checklist-section high">
+                            <div class="checklist-title high">🔴 HIGH PRIORITY - Book by March 15</div>
+                            <ul class="checklist-items">
+                                <li>✓ Eiffel Tower Summit Tickets</li>
+                                <li>✓ Louvre Museum Timed Entry</li>
+                                <li>✓ Musée d'Orsay Tickets</li>
+                                <li>✓ Sainte-Chapelle Tickets</li>
+                                <li>✓ Versailles Palace (if doing Day 6 Option B)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="checklist-section medium">
+                            <div class="checklist-title medium">🟡 MEDIUM PRIORITY</div>
+                            <ul class="checklist-items">
+                                <li>✓ Arc de Triomphe Rooftop</li>
+                                <li>✓ Seine River Cruise</li>
+                                <li>✓ Special Dinner Reservations</li>
+                                <li>✓ Airport Transfers</li>
+                                <li>✓ Navigo Découverte Pass</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="checklist-section low">
+                            <div class="checklist-title low">🟢 BEFORE YOU LEAVE</div>
+                            <ul class="checklist-items">
+                                <li>✓ Download Apps (RATP, Google Maps, Google Translate)</li>
+                                <li>✓ Notify Credit Card Companies</li>
+                                <li>✓ Check Passport Validity (6 months required)</li>
+                                <li>✓ Pack Adapters (Type E plugs, 220V)</li>
+                                <li>✓ Print Hotel Confirmation</li>
+                                <li>✓ Travel Insurance</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function selectDay(idx) {
+            currentDay = idx;
+            renderApp();
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            renderApp();
+        }
+
+        // Initial render
+        renderApp();
+
+        // PWA Manifest
+        const manifestData = {
+            "name": "Paris Family Trip 2026",
+            "short_name": "Paris Trip",
+            "description": "Your complete Paris trip planner for March 29 - April 4, 2026",
+            "start_url": ".",
+            "display": "standalone",
+            "background_color": "#ffffff",
+            "theme_color": "#3B82F6",
+            "orientation": "portrait",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%233B82F6' width='100' height='100'/%3E%3Ctext y='75' x='50' text-anchor='middle' font-size='70'%3E🗼%3C/text%3E%3C/svg%3E",
+                    "sizes": "192x192",
+                    "type": "image/svg+xml",
+                    "purpose": "any maskable"
+                },
+                {
+                    "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%233B82F6' width='100' height='100'/%3E%3Ctext y='75' x='50' text-anchor='middle' font-size='70'%3E🗼%3C/text%3E%3C/svg%3E",
+                    "sizes": "512x512",
+                    "type": "image/svg+xml"
+                }
+            ]
+        };
+
+        const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/json' });
+        const manifestURL = URL.createObjectURL(manifestBlob);
+        document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
+
+        // Install prompt handling
+        let deferredPrompt;
+        const installPrompt = document.getElementById('install-prompt');
+        const installButton = document.getElementById('install-button');
+        const dismissButton = document.getElementById('dismiss-button');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installPrompt.style.display = 'flex';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response: ${outcome}`);
+                deferredPrompt = null;
+                installPrompt.style.display = 'none';
+            }
+        });
+
+        dismissButton.addEventListener('click', () => {
+            installPrompt.style.display
